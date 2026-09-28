@@ -1,0 +1,54 @@
+# The public catalogs' merge check: every release a pull request carries must
+# name a commit on its source repository's default branch. `ops catalogs
+# verify` makes the check; it runs from a checkout of the platform tree,
+# whose root runs every application in it directly.
+#
+# The token reads the platform tree and every source repository a release
+# names. `github.token` reaches public ones only; set `CATALOGS_TOKEN` to a
+# token that can read the private ones.
+name: verify
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      TOKEN: ${{ secrets.CATALOGS_TOKEN != '' && secrets.CATALOGS_TOKEN || github.token }}
+      # The platform tree states `>=3.13` and pins nothing, so uv would take
+      # the newest Python, which its pinned pydantic-core cannot build for.
+      UV_PYTHON: '3.13'
+    steps:
+      - name: check out the catalogs
+        uses: actions/checkout@v4
+        with:
+          path: catalogs
+          fetch-depth: 0
+      - name: fetch the branch the pull request targets
+        run: git -C catalogs fetch origin "${{ github.event.pull_request.base.ref }}"
+      - name: check out the platform tree
+        uses: actions/checkout@v4
+        with:
+          repository: solidplanssoftware/platform
+          ref: master
+          path: platform
+          submodules: true
+          token: ${{ env.TOKEN }}
+      - name: let git read the source repositories
+        run: git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "https://github.com/"
+      - uses: astral-sh/setup-uv@v5
+      - name: verify
+        working-directory: platform
+        env:
+          CATALOG_ROOT: ${{ github.workspace }}/platform
+        run: >-
+          uv run python -m ops_tool.src.app
+          --repo-root "${{ github.workspace }}/catalogs"
+          catalogs verify
+          --base "origin/${{ github.event.pull_request.base.ref }}"
+          --head HEAD
