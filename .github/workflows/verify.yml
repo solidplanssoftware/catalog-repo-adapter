@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: solidplanssoftware/platform
-          ref: master
+          ref: impl-tool/OPS-0000004
           path: platform
           submodules: true
           token: ${{ env.TOKEN }}
