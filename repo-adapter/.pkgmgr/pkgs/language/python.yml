@@ -1,0 +1,429 @@
+schemaVersion: 0.0.0
+pkgs:
+  language:
+    python:
+      versions:
+        0.0.0:
+          label: python
+          name: python
+          type: local
+          path: language/python/0.0.0
+          version: 0.0.0
+          sha: 740eb02354a9788d34576109820667702e8eddfb
+          shaKind: commit
+          registeredAt: 2026-10-23T20:39:45+00:00[UTC]
+          releaseNotes:
+            changes:
+            - pullRequest: 5
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/5
+              summary: Made the comments command return each comment with its line
+                number, matching the updated adapter contract, and documented which
+                generator drives each package's code and which side of the submodule
+                facade each package sits on.
+            - pullRequest: 7
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/7
+              summary: Removed the vendored checkouts of the contract and platform
+                packages, the local submodule file and the lock file, and pointed
+                the type checker at sibling checkouts instead.
+            - pullRequest: 8
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/8
+              summary: Made the paths given to a run select what the adapter runs.
+            - pullRequest: 9
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/9
+              summary: Advanced the pinned shared documents to the revision whose
+                pre-merge check enforces follow-up handling.
+            - pullRequest: 10
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/10
+              summary: Advanced the pinned shared documents to the revision that renames
+                the tool from issue-runner to impl-tool.
+            - pullRequest: 11
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/11
+              summary: Changed the adapter's command tests to run the CLI in-process,
+                and replaced the test harness's argument rewriting with explicit fixtures.
+            - pullRequest: 12
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/12
+              summary: Advanced the pinned shared documents to the revision that moves
+                follow-up enumeration and write-back into a command and checks that
+                follow-up items cite commits in the repository carrying the pull request.
+            - pullRequest: 13
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/13
+              summary: Advanced the pinned repo adapter to the revision that wraps
+                the dev-tool source in a dev_tool namespace directory.
+            - pullRequest: 14
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/14
+              summary: Documented the multi-value --scope and --id flags of the followups
+                commands in the pr-followup skill.
+            - pullRequest: 16
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/16
+              summary: Dropped the dev_tool_ prefix from the adapter's package names,
+                so the contract is imported as repo_adapter_api and the adapter as
+                repo_adapter, and renamed the pwsh template to match.
+            - pullRequest: 17
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/17
+              summary: Named the application's configuration files and rule-handler
+                packages to the packager, so a frozen executable carries the files
+                it reads at start-up.
+            - pullRequest: 18
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/18
+              summary: Advanced the pinned repo adapter to the revision whose impl-tool
+                falls back to the branch base for submodules new to a branch, restoring
+                their hierarchy section, and that allows nested submodules.
+            - pullRequest: 19
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/19
+              summary: Moved the library sources into src/ behind root-level facades,
+                added a manifest.yml, supported single-file module roots, and took
+                configuration as serialized data rather than shared models, which
+                removes the run-time dependency on dev-tool.
+            - pullRequest: 20
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/20
+              summary: Changed the build signature to take its entry point, artifact
+                name, destination, scratch directory and packaging inputs from the
+                caller, so the adapter no longer walks the repository to guess what
+                to bundle; lint now runs ruff directly and narrows with --paths.
+            - pullRequest: 21
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/21
+              summary: Advanced the pinned shared documents to a newer revision.
+            - pullRequest: 22
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/22
+              summary: Made unnarrowed test runs distribute across cores while narrowed
+                runs stay in one process, with the worker count passed on the command
+                line rather than through addopts.
+            - pullRequest: 23
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/23
+              summary: Advanced the pinned shared documents to the revision whose
+                review skill ships start-now work before ruling on follow-up items.
+            - pullRequest: 24
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/24
+              summary: Anchored the build and dist ignore patterns to the repository
+                root, so source directories with those names are no longer ignored.
+            - pullRequest: 25
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/25
+              summary: Advanced the pinned shared documents to the revision that validates
+                follow-up text locally and names queue notes by slug in pull request
+                bodies.
+            - pullRequest: 26
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/26
+              summary: Added a post-merge workflow that re-runs checks blocked by
+                open submodule pull requests once those pull requests merge.
+            - pullRequest: 27
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/27
+              summary: Added tree-shape methods that report the directories a tree
+                walker should skip, the dotted name of a package, and the package
+                data declared in pyproject.toml.
+            - pullRequest: 28
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/28
+              summary: Changed the adapter's test helper calls to use keyword arguments,
+                so the adapter passes the updated lint rules when run standalone.
+            - pullRequest: 29
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/29
+              summary: Vendored the adapter's platform dependencies into a git-ignored
+                lib/ directory declared in .dev-tool/config.yml, pointed pyproject.toml
+                and ruff.toml at lib/ instead of sibling checkouts, raised requires-python
+                to 3.13, and replaced repo-adapter-api with PyYAML, pydantic and tzdata
+                as third-party dependencies.
+            - pullRequest: 30
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/30
+              summary: Rewrote two README sentences from past tense to present tense,
+                with no code change.
+            - pullRequest: 31
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/31
+              summary: Added a workflow_run trigger to the post-merge workflow, so
+                it also runs when pre-merge completes and releases submodules waiting
+                on this repository.
+            - pullRequest: 32
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/32
+              summary: Advanced the pinned shared documents to the revision that aligns
+                every nested checkout.
+            - pullRequest: 33
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/33
+              summary: Added a concurrency group to the post-merge workflow, so a
+                burst of runs for one branch collapses to the newest run.
+            - pullRequest: 34
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/34
+              summary: The post-merge workflow now requests the platform's sweep instead
+                of performing it in each repository.
+            - pullRequest: 35
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/35
+              summary: The adapter reads a module's requirements from both inline
+                dependencies and setuptools' dynamic declarations, and renders the
+                vendored requirements file from the requirements collected from published
+                artifacts.
+            - pullRequest: 36
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/36
+              summary: 'Added INSTRUCTIONS.md, which documents the Python-specific
+                working discipline: the public boundary, the submodule facade, test
+                placement, generated files, frozen models and TYPE_CHECKING imports.'
+            - pullRequest: 37
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/37
+              summary: Declared the adapter as runtime-resolved with a runtimeCoordinate
+                in its manifest, and took the lint excludes as a parameter rather
+                than reading them from configuration.
+            - pullRequest: 38
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/38
+              summary: Removed the temporary .gitignore rule that excluded pr-description.yml.
+            - pullRequest: 39
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/39
+              summary: The lint excludes are now an argument to lint rather than a
+                configuration field, so --exclude-path reaches the adapter.
+            - pullRequest: 40
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/40
+              summary: Renamed the lint method's exclude parameter to camelCase excludePath,
+                while the command-line flag stays --exclude-path.
+            - pullRequest: 41
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/41
+              summary: Pared the repository's CLAUDE.md down to present-tense instructions.
+            - pullRequest: 42
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/42
+              summary: Documented in the README that an isolated clone needs dev isolate
+                --tree before dev vendor, and what the BUILD_CATALOG_NONE_REACHABLE
+                error means.
+            - pullRequest: 43
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/43
+              summary: Type generation identifies the package named for the distribution
+                when a repository publishes several packages under packages/.
+            - pullRequest: 44
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/44
+              summary: Added a check that a vendored Python tree can import itself,
+                reporting imports of its own modules that do not resolve, without
+                running any of its code.
+            - pullRequest: 45
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/45
+              summary: The adapter reports the path sources of a repository's package
+                manager, read from [tool.uv.sources], and ignores the requirements
+                record that vendor writes.
+            - pullRequest: 46
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/46
+              summary: Made the adapter's commands runnable standalone, and stopped
+                overriding pytest's addopts, so tests declared by package name are
+                collected from the consumer's own configuration.
+            - pullRequest: 47
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/47
+              summary: Renamed the vendored context coordinate to impl-tool:context,
+                wired the build catalog to the tree through .pkgmgr/config.yml, and
+                changed the lint exclude parameter to exclude, taking paths.
+            - pullRequest: 48
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/48
+              summary: Renamed the catalog variable from PLATFORM_CATALOG_ROOT to
+                PARENT_CATALOG_ROOT in the adapter's catalog wiring and documentation,
+                and documented that each application's API is its own package.
+            - pullRequest: 49
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/49
+              summary: Updated the repo-adapter-api dependency to its new repo-adapter-api
+                namespace.
+            - pullRequest: 50
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/50
+              summary: Changed the adapter's schema test to import the contract types
+                from the schema package root, and to compare schemaVersion as a Version.
+            - pullRequest: 51
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/51
+              summary: Added an anchored /logs/ entry to the adapter's .gitignore.
+            - pullRequest: 52
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/52
+              summary: Renamed the srcPaths configuration field to ownRoots, and made
+                test runs always distribute across cores.
+            - pullRequest: 53
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/53
+              summary: Moved the adapter's implementation from repo_adapter.py into
+                the package's __init__.py, so the module repo_adapter.repo_adapter
+                no longer exists.
+            - pullRequest: 54
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/54
+              summary: Consolidated the adapter's skip lists into one, rooting build,
+                dist, lib, .venv and node_modules at the module root, and exposed
+                the language's gitignore rules through the contract.
+            - pullRequest: 55
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/55
+              summary: Generated schema document models now carry schemaVersion alongside
+                metadata.version.
+            - pullRequest: 56
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/56
+              summary: Listed release_process.md among the shared documents in CLAUDE.md.
+            - pullRequest: 57
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/57
+              summary: Added /.dev-tool/resolved.yml to the generated .gitignore,
+                so the machine-local resolution record stays out of the working tree.
+            - pullRequest: 58
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/58
+              summary: Wrote schemaVersion as a three-part version, 0.0.0-dev, in
+                the configuration files, as the loader now requires.
+            - pullRequest: 59
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/59
+              summary: Added a command catalog that mirrors the schema catalog, git-ignored
+                as .command/, and renamed the catalog variable to CATALOG_ROOT.
+            - pullRequest: 61
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/61
+              summary: Floated the adapter's two development coordinates, impl-tool:context
+                and repo-adapter-api, by removing their @0.0.0 pins.
+            - pullRequest: 62
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/62
+              summary: Updated the documentation for hyphenated checkout directories,
+                so impl-tool is checked out at impl-tool and imported as impl_tool.
+            - pullRequest: 63
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/63
+              summary: Pinned pydantic to 2.13.5, so the tree builds on Python 3.14.
+            - pullRequest: 64
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/64
+              summary: The generated .gitignore treats /repo-adapter/ as generated
+                by dev vendor rather than tracked, and the documentation describes
+                how the adapter reaches consumers through the build catalog.
+            - pullRequest: 65
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/65
+              summary: Moved the schemaVersion of three configuration files from 0.0.0-dev
+                to 0.0.0, and marked the upstream catalog store sameTree.
+            - pullRequest: 66
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/66
+              summary: Renamed the module coordinate from language:repo_adapter to
+                language:repo-adapter, and marked the schema versions 0.0.0-dev.
+            - pullRequest: 67
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/67
+              summary: 'Translated the packaging contract into PyInstaller''s flags:
+                modules loaded by name, packages loaded by name and excluded packages,
+                and the adapter''s API version is now written as major.minor.patch.'
+            - pullRequest: 68
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/68
+              summary: The adapter detects test files from the repository's pytest
+                configuration, taking test directories and file patterns from pytest's
+                own settings and falling back to pytest's defaults.
+            - pullRequest: 69
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/69
+              summary: The adapter resolves an application's definition binding by
+                finding the module that assigns cli_config, searching src/ and then
+                the module root, and refuses when more than one module binds it.
+            - pullRequest: 71
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/71
+              summary: The adapter reports what a module's submodule_api.py facade
+                imports, so dev-tool's selection can tell whether a change reaches
+                a nested module.
+            - pullRequest: 72
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/72
+              summary: Clarified in INSTRUCTIONS.md that tests of nested modules belong
+                in those modules' own __tests__ directories, which the TST001 lint
+                rule enforces.
+            - pullRequest: 73
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/73
+              summary: 'Added test tier support: a test''s tier is the directory it
+                sits in under __tests__, and the adapter builds pytest ignore arguments
+                for the tiers a run skips.'
+            - pullRequest: 74
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/74
+              summary: Clarified in INSTRUCTIONS.md that external packages are declared
+                and imported at the submodule that uses them, never through the facade.
+            - pullRequest: 75
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/75
+              summary: Generates PyInstaller spec files that name obtained package
+                directories as search paths and walk them to enumerate modules, so
+                executables built from a checkout start.
+            - pullRequest: 76
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/76
+              summary: Removed the labeled trigger from gate.yml and moved the gate
+                label start to a separate gate-label workflow, so other labels no
+                longer leave a skipped gate check.
+            - pullRequest: 78
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/78
+              summary: Uses the renamed RepositoryConfigDocument type from the adapter
+                contract in every method that takes configuration.
+            - pullRequest: 79
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/79
+              summary: Compiles executables with Nuitka in standalone mode through
+                a generated plugin and driver script, so the artifact holds native
+                code rather than bytecode.
+            - pullRequest: 80
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/80
+              summary: Split the adapter into a language core, language:python-core,
+                which is code, and a python adapter configuration document, which
+                states the layout the core is given.
+            - pullRequest: 81
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/81
+              summary: Removed the install verb from the adapter's configuration,
+                so sync is now the only install command, and the README says dev sync.
+            - pullRequest: 82
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/82
+              summary: Added pins.yml, a caller that starts the pins run on a push
+                to master and on manual dispatch in each pinned repository.
+            - pullRequest: 83
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/83
+              summary: The core states its adapter API version, 0.0.0, as a literal
+                rather than reading it from the contract, so the loader's version
+                check can fail.
+            - pullRequest: 84
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/84
+              summary: Obtains the internal shared documents beside the client package,
+                and CLAUDE.md lists the release process, vision and shipping documents
+                from the internal package.
+            - pullRequest: 85
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/85
+              summary: Declared the Python versions the adapter is for, 3.13 and 3.14,
+                and added language_version, which reads the lowest version a repository's
+                requires-python admits.
+            - pullRequest: 86
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/86
+              summary: Counts src-layout packages by how they are imported, and accepts
+                Python 3.9 projects.
+            - pullRequest: 88
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/88
+              summary: A run given no path leaves out git-ignored paths, so vendored
+                libraries and fetched adapters with their own tests are no longer
+                collected.
+            - pullRequest: 89
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/89
+              summary: Added an integration test that runs a real pytest tree to hold
+                the isolated tier to starting no process, and reports what each test
+                tried to start.
+            - pullRequest: 90
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/90
+              summary: Test directory detection now recognises tests only at the root,
+                while __tests__ is recognised at any depth; the store configuration
+                key changed from uri to location; and the docs use --validate.
+            - pullRequest: 91
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/91
+              summary: The adapter reads the error codes a Python package's source
+                raises from its syntax tree, without importing the package.
+            - pullRequest: 92
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/92
+              summary: Added a bundled PyInstaller form beside the Nuitka build, selected
+                by form, so internal releases can be bundled rather than compiled.
+            - pullRequest: 93
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/93
+              summary: 'Hands set-valued configuration to the core as tuples: non-source
+                patterns, test directories and test file patterns are read as sets.'
+            - pullRequest: 94
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/94
+              summary: Compiled applications are now one onefile executable per platform,
+                with the binaries signed before they are packed; the bundled form
+                still produces a directory.
+            - pullRequest: 95
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/95
+              summary: Read a module's boundary files external_api.py and submodule_api.py
+                through one reader, removed the error-code reader, and no longer exclude
+                /build, /dist and /lib from the non-source patterns.
+            - pullRequest: 96
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/96
+              summary: The adapter reads its glob fields as typed globs, and the ruff
+                exclude is written as an anchored pattern so ruff passes over what
+                the glob names.
+            - pullRequest: 97
+              url: https://github.com/solidplanssoftware/repo-adapter-python/pull/97
+              summary: Marked the pkgmgr configuration 0.0.0-dev, the version its
+                newly granted feature flags require.
+            considerations: []
+          dependencies:
+          - coordinate: logger:logger@0.0.0
+            sha: debb429825ac3e7491804aedd6ce5718e4287562
+          - coordinate: logger:logger-pwsh@0.0.0
+            sha: af2681512cd362a9c27e6de7b344120c6a6fd88a
+          - coordinate: logger:logger-sh@0.0.0
+            sha: 9e787731ecc2aa7968758da44a62e97b04cedf67
+          - coordinate: manifest:manifest@0.0.0
+            sha: abf6b4c7f01b056e1397a69e189b45420723d29c
+          - coordinate: process:process@0.0.0
+            sha: d38a49d92483589daa8b4de501e54cb58cd69a11
+          - coordinate: repo-adapter-api:repo-adapter-api@0.0.0
+            sha: aa2c39f69b20b5551c423c493d648314fcc85226
+          - coordinate: schema:schema@0.0.0
+            sha: 604a924499f8ce630b5b54f95308cf9ce2c46203
+          - coordinate: type:type@0.0.0
+            sha: 1cd7c694f324f71ccc529885300afefa8bf19f39
+          audience: public
+          languageVersions:
+          - '3.9'
+          - '3.14'

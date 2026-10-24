@@ -1,4 +1,4 @@
-schemaVersion: 0.0.0-dev
+schemaVersion: 0.0.0
 pkg: repo-adapter
 versionShape: major.minor.patch
 indexLayout: per-package
