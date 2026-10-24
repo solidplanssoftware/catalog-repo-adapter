@@ -1,0 +1,172 @@
+# The python adapter: the Python language core, and what this tree's layout
+# configures of it.
+#
+# Everything here is something two Python repositories may differ on. A
+# repository laid out another way -- its tests under `spec/`, flake8 where
+# this runs ruff -- is adapted by a second document like this one naming the
+# same core, and carries no copy of the core's code. What is true of every
+# Python repository is the core's: how an import names a module, how
+# `pyproject.toml` spells a requirement, how pytest is told to leave a tier
+# out.
+schemaVersion: '0.0.0'
+
+# The Python language core, resolved by coordinate through the catalogs this
+# adapter's own coordinate is resolved through.
+core: language:python-core
+
+# Where a Python repository keeps tests whatever its runner is told: a
+# `__tests__` package beside the code, which is this tree's layout, and a
+# `tests` directory, which is most others'. Everything under one is a test
+# file -- a helper module and a fixture document as much as a test module --
+# because nothing a test directory holds is imported by the code beside it.
+#
+# `__tests__` is unrooted: one at any depth is a test directory, under
+# whichever module's root it is met. `tests` is rooted (the owner's ruling of
+# 2026-10-14): only a `tests` directory at the root a reader measures from is
+# one, so a package named `tests` deeper in the code -- dev-tool's `project
+# tests` command group -- is source. The tree keeps no `tests` directory at a
+# repository's or a module's root, so every reader agrees on that root.
+#
+# Not `test`. That is what a package of test *support* is called -- a library
+# other packages' tests import, whose own imports are what its consumers need
+# at run time -- and reading it as tests would file a test library's every
+# dependency under the wrong heading.
+testDirectories:
+- __tests__
+- /tests
+
+# What pytest collects as a test module where a repository says nothing: its
+# own default for `python_files`. A repository stating its own gets exactly
+# those, read by the core out of the configuration pytest itself would read.
+testFilePatterns:
+- test_*.py
+- '*_test.py'
+
+# A tier's tests sit in a package named for it between double underscores,
+# `__integration__`, which is the spelling `__tests__` itself has: it sorts
+# apart from the test modules beside it and cannot be mistaken for a package
+# of helpers. Only the spelling is read. Which names are tiers is the
+# repository's `testTiers`: `__types__` spells `types`, and is no tier
+# because no repository declares it.
+tierDirectory: __{tier}__
+
+# A compiler's cache, an environment installed into the tree, a dependency
+# tree fetched into it, and what a build writes -- plus the caches the type
+# checkers and linters of this language leave behind. None of them is source,
+# and a walk that enters one is reading generated, fetched or third-party
+# files as though this repository had written them.
+#
+# One list, read by every walk that skips anything: the core's dependency
+# scan and its vendored-import scan, and dev-tool's archive walk, its
+# structure walk and the digest that keys a build.
+#
+# Each entry is read the way an ignore file's line is: rooted at the module
+# root when it opens with `/`, and matched at any depth when it does not. The
+# environment and the dependency tree are rooted because that is the only
+# place a repository has one. Where the framework builds, packages and
+# vendors -- `/build`, `/dist`, `/lib` -- is not the language's to state:
+# `repo_adapter_api`'s `all_non_source_patterns` joins those to this list for
+# every reader.
+#
+# What this list names and what `gitignoreRules` names are kept in step: a
+# directory git does not track is one a walk passes over, and one a walk
+# passes over is one git does not track.
+nonSourcePatterns:
+- __pycache__
+- .mypy_cache
+- .ruff_cache
+- .pytest_cache
+- /.venv*
+- /node_modules
+- '*.egg-info'
+
+# What a Python checkout holds because it is Python, and nobody writes by
+# hand. Each carries the reason it exists, because the caller writing a
+# repository's ignore file writes the reason into it beside the pattern.
+#
+# Only what the language and its tools put there. Where a build writes and
+# where a vendoring step unpacks are the same whatever the language; the
+# caller holds those and puts the two sets together.
+gitignoreRules:
+- pattern: '**/__pycache__'
+  why: The compiler's cache, which appears beside any module it has run.
+- pattern: '**/*.py[cod]'
+  why: >-
+    The compiled files themselves, where one is written without its
+    directory. `[cod]` rather than a bare `c`, so an extension module built in
+    place is covered as well.
+- pattern: .pytest_cache
+  why: The test runner's cache.
+- pattern: .ruff_cache
+  why: The linter's cache.
+- pattern: .venv*
+  why: >-
+    An environment installed into the checkout. The star is load-bearing: a
+    virtualenv that failed to build is left beside the good one as
+    `.venv.broken`, and a walk that entered it read its site-packages as this
+    repository's source.
+- pattern: .python-version
+  why: >-
+    Which interpreter the machine happens to use, which is the machine's and
+    not the repository's.
+- pattern: '*.egg-info'
+  why: Packaging metadata a build writes.
+- pattern: .mypy_cache
+  why: A type checker's cache, where one is run beside the tools this adapter names.
+- pattern: /node_modules
+  why: >-
+    A JavaScript dependency tree installed into the checkout, where a Python
+    repository carries a site or a tool of its own beside its packages.
+
+# The command line each verb runs. `test` and `build` are not here: what
+# pytest and the packager are passed is worked out at run time, by the core.
+commands:
+  # Ruff is what linting means here. A repository that lints through a script
+  # of its own -- custom rules, a wrapper, a second linter -- says so in its
+  # `repoAdapterCommands`, and this is not consulted.
+  lint:
+    executable: uv
+    args:
+    - run
+    - python
+    - -m
+    - ruff
+    - check
+    passthroughArgs:
+    - value: fix
+      flag: --fix
+    # Each exclude is a glob, and ruff reads a pattern otherwise: it anchors
+    # one holding a separator and takes no leading `/`. `anchored` writes
+    # each glob as ruff reads it, so ruff passes over what the glob names.
+    - value: exclude
+      flag: --extend-exclude
+      form: anchored
+    - value: paths
+  format:
+    executable: uv
+    args:
+    - run
+    - python
+    - -m
+    - ruff
+    - format
+    passthroughArgs:
+    - value: paths
+  typecheck:
+    executable: uv
+    args:
+    - run
+    - python
+    - -m
+    - pyright
+    passthroughArgs:
+    - value: paths
+  sync:
+    executable: uv
+    args:
+    - sync
+    - --group
+    - dev
+    passthroughArgs:
+    - value: repoRoot
+      flag: --project

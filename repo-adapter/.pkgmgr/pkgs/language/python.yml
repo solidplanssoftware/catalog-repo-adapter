@@ -1,0 +1,35 @@
+schemaVersion: 0.0.0
+pkgs:
+  language:
+    python:
+      versions:
+        0.0.0:
+          label: python
+          name: python
+          type: local
+          path: language/python/0.0.0
+          version: 0.0.0
+          sha: 740eb02354a9788d34576109820667702e8eddfb
+          shaKind: commit
+          registeredAt: 2026-10-23T20:39:45+00:00[UTC]
+          dependencies:
+          - coordinate: logger:logger@0.0.0
+            sha: debb429825ac3e7491804aedd6ce5718e4287562
+          - coordinate: logger:logger-pwsh@0.0.0
+            sha: af2681512cd362a9c27e6de7b344120c6a6fd88a
+          - coordinate: logger:logger-sh@0.0.0
+            sha: 9e787731ecc2aa7968758da44a62e97b04cedf67
+          - coordinate: manifest:manifest@0.0.0
+            sha: abf6b4c7f01b056e1397a69e189b45420723d29c
+          - coordinate: process:process@0.0.0
+            sha: d38a49d92483589daa8b4de501e54cb58cd69a11
+          - coordinate: repo-adapter-api:repo-adapter-api@0.0.0
+            sha: aa2c39f69b20b5551c423c493d648314fcc85226
+          - coordinate: schema:schema@0.0.0
+            sha: 604a924499f8ce630b5b54f95308cf9ce2c46203
+          - coordinate: type:type@0.0.0
+            sha: 1cd7c694f324f71ccc529885300afefa8bf19f39
+          audience: public
+          languageVersions:
+          - '3.9'
+          - '3.14'
