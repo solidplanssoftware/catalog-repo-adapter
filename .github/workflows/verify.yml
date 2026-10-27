@@ -3,9 +3,13 @@
 # verify` makes the check; it runs from a checkout of the platform tree,
 # whose root runs every application in it directly.
 #
-# The token reads the platform tree and every source repository a release
-# names. `github.token` reaches public ones only; set `CATALOGS_TOKEN` to a
-# token that can read the private ones.
+# It acts as the tree's CI app, from the `CI_APP_ID` variable and the
+# `CI_APP_PRIVATE_KEY` secret this repository holds: a token minted as the
+# step before its first read, contents read alone, on every repository the
+# app's installation reaches -- the platform tree and every source
+# repository a release names. A repository holding no `CI_APP_ID` fails at
+# that step, naming it. It runs on `pull_request` and never on
+# `pull_request_target`, so a fork's pull request is handed no credential.
 name: verify
 on:
   pull_request:
@@ -19,7 +23,6 @@ jobs:
     permissions:
       contents: read
     env:
-      TOKEN: ${{ secrets.CATALOGS_TOKEN != '' && secrets.CATALOGS_TOKEN || github.token }}
       # The platform tree states `>=3.13` and pins nothing, so uv would take
       # the newest Python, which its pinned pydantic-core cannot build for.
       UV_PYTHON: '3.13'
@@ -31,6 +34,14 @@ jobs:
           fetch-depth: 0
       - name: fetch the branch the pull request targets
         run: git -C catalogs fetch origin "${{ github.event.pull_request.base.ref }}"
+      - name: act as the tree's CI app
+        id: app
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.CI_APP_ID }}
+          private-key: ${{ secrets.CI_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-contents: read
       - name: check out the platform tree
         uses: actions/checkout@v4
         with:
@@ -38,8 +49,10 @@ jobs:
           ref: master
           path: platform
           submodules: true
-          token: ${{ env.TOKEN }}
+          token: ${{ steps.app.outputs.token }}
       - name: let git read the source repositories
+        env:
+          TOKEN: ${{ steps.app.outputs.token }}
         run: git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "https://github.com/"
       - uses: astral-sh/setup-uv@v5
       - name: verify
