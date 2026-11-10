@@ -12,8 +12,8 @@ the tracked files of the adapter's module at the released commit, which the
 resolver puts on the import path as they are. A release's pull request shows
 the adapter's source as it will run.
 
-The catalog states `indexLayout: per-package` in its `pkgmgr.manifest.yml`:
-its index is one `.pkgmgr/pkgs/<namespace>/<name>.yml` per adapter, `latest`
+The catalog states `indexLayout: per-package` in its `catalog.manifest.yml`:
+its index is one `.pkg-tool/pkgs/<namespace>/<name>.yml` per adapter, `latest`
 worked out from the versions present, so two releases of different adapters
 touch no common file. One version released twice with different source still
 meets as an add/add conflict, which is write-once governance at the merge.
