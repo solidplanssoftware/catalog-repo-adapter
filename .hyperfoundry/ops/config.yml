@@ -1,0 +1,13 @@
+# What `ops-tool` reads in this catalog's own checkout: the workflow it is
+# given, which `ops catalog gen` writes from this file and every pull request
+# holds to with `ops catalog gen --validate`, and the tree that workflow checks
+# out and runs this application from.
+catalogWorkflows:
+  generate:
+  - verify
+  tree:
+    repository: solidplanssoftware/platform
+    ref: master
+  # The tree states `>=3.13` and pins nothing, so uv would take the newest
+  # Python, which its pinned pydantic-core cannot build for.
+  python: '3.13'
